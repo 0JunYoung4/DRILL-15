@@ -61,7 +61,7 @@ class Zombie:
     def handle_collision(self, group, other):
         if group == 'boy:zombie':
             game_framework.quit()
-        if group == 'ball:zombie':
+        if group == 'zombie:ball':
             self.hitcount += 1
             self.size *= 0.5
             if self.hitcount >= 2:
