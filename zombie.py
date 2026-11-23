@@ -56,14 +56,16 @@ class Zombie:
         draw_rectangle(*self.get_bb())
 
     def get_bb(self):
-        return self.x - 100, self.y - 100, self.x + 100, self.y + 100
+        return self.x - self.size/2, self.y - self.size/2, self.x + self.size/2, self.y + self.size/2
 
     def handle_collision(self, group, other):
         if group == 'boy:zombie':
             game_framework.quit()
         if group == 'zombie:ball':
-            self.hitcount += 1
-            self.size *= 0.5
-            if self.hitcount >= 2:
+            if self.hitcount == 0:
+                self.hitcount += 1
+                self.size *= 0.5
+                self.y -= self.size
+            elif self.hitcount >= 2:
                 game_world.remove_object(self)
-            return
+            
