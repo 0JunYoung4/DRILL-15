@@ -145,7 +145,7 @@ class Boy:
                     1 if self.item == 'Ball' else 2)
         game_world.add_oject(ball)
         game_world.add_collision_pair('zombie:ball',None, ball)
-        
+        game_world.add_collision_pair('boy:ball', None, ball)
 
     def pause(self):
         self.pressed_keys.clear()
