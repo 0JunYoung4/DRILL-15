@@ -30,6 +30,8 @@ class Zombie:
             }
 
     def __init__(self):
+        self.hitcount = 0
+        self.size = 200
         self.load_images()
         self.x, self.y = random.randint(MIN_X, MAX_X), 150
         self.frame = random.randint(0, 9)
@@ -48,9 +50,9 @@ class Zombie:
     def draw(self):
         image = Zombie.images['Walk'][int(self.frame)]
         if self.dir < 0:
-            image.composite_draw(0, 'h', self.x, self.y, 200, 200)
+            image.composite_draw(0, 'h', self.x, self.y, self.size, self.size)
         else:
-            image.draw(self.x, self.y, 200, 200)
+            image.draw(self.x, self.y, self.size, self.size)
         draw_rectangle(*self.get_bb())
 
     def get_bb(self):
@@ -59,3 +61,7 @@ class Zombie:
     def handle_collision(self, group, other):
         if group == 'boy:zombie':
             game_framework.quit()
+        if group == 'ball:zombie':
+            self.hitcount += 1
+            self.size *= 0.5
+            
